@@ -20,7 +20,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rywillia/awx-test",
-    packages=['awx'],
+    packages=['awx','awx.commands'],
     install_requires=requirements,
     classifiers=(
         "Programming Language :: Python :: 3.5",
