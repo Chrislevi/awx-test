@@ -124,7 +124,7 @@ class AwxProject(AwxBase):
                 scm_type=scm_type,
                 scm_url=url,
                 scm_branch=branch,
-                scm_credential=credential,
+                credential=credential,
                 scm_clean=clean,
                 scm_delete_on_update=delete_on_update,
                 scm_update_on_launch=update_on_launch,
