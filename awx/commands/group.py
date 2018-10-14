@@ -77,3 +77,22 @@ class AwxGroup(AwxBase):
             return self.resource.get(name=name, inventory=inventory['id'])
         except NotFound as ex:
             raise Exception(ex.message)
+
+    def associate(self, group, parent, inventory):
+        """Associate group with a parent group.
+
+        :param group: Group name.
+        :type group: str
+        :param parent: Parent group name.
+        :type parent: str
+        :param inventory: Inventory name.
+        :type inventory: str
+        """
+
+        # get group
+        child = self.get(group, inventory)
+
+        # Parent group
+        parent = self.get(parent, inventory)
+
+        self.resource.associate(group=child['id'], parent=parent['id'])

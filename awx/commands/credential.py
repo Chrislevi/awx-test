@@ -65,6 +65,39 @@ class AwxCredential(AwxBase):
         except Found:
             self.logger.warn('Credential %s already exists!' % name)
 
+    def create_credential(self, name, organization, username, password, kind):
+        """Create a SSH User/Pass credential entry.
+
+        :param name: Credential name.
+        :type name: str
+        :param organization: Organization name.
+        :type organization: str
+        :param username: SSH username.
+        :type username: str
+        :param password: SSH username.
+        :type password: str
+        :param kind: Credential type. (SCM or SSH)
+        :type kind: str
+        """
+        # check if organization exists
+        _org = self.organization.get(organization)
+
+        # quit if organization not found
+        if not _org:
+            raise Exception('Organization %s not found.' % organization)
+
+        try:
+            self.resource.create(
+                name=name,
+                kind=kind,
+                organization=_org['id'],
+                username=username,
+                password=password,
+                fail_on_found=True
+            )
+        except Found:
+            self.logger.warn('Credential %s already exists!' % name)
+
     def delete(self, name, kind):
         """Delete a credential entry."""
         self.resource.delete(name=name, kind=kind)
